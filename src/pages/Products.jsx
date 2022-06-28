@@ -12,7 +12,7 @@ export const Products = () => {
       <div className="w-full h-1 bg-zinc-900 border rounded"></div>
       <div className="grid grid-cols-3 gap-7">
         {shoes.map((shoe) => {
-          return <Card shoe={shoe} />;
+          return <Card key={shoe.name} shoe={shoe} />;
         })}
       </div>
     </div>

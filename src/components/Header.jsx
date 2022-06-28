@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { House, ShoppingBagOpen } from "phosphor-react";
 
 export const Header = () => {
@@ -7,16 +8,16 @@ export const Header = () => {
       <div>
         <ul className="flex gap-3">
           <li>
-            <a href="" className="flex items-center gap-1">
+            <Link to="/" className="flex items-center gap-1">
               <House size={18} />
               Home
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="" className="flex items-center gap-1">
+            <Link to="/products" className="flex items-center gap-1">
               <ShoppingBagOpen size={18} />
               Products
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

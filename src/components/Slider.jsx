@@ -1,17 +1,12 @@
-import { shoes } from "../data/data";
-
 import { CaretCircleLeft, CaretCircleRight } from "phosphor-react";
 import { useState } from "react";
 
-export const Slider = () => {
+export const Slider = ({ slides }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [translate, setTranslate] = useState(0);
 
   const nextSlide = () => {
-    if (
-      activeIndex === shoes[0].images.length - 1 ||
-      activeIndex > shoes[0].images.length - 1
-    ) {
+    if (activeIndex === slides.length - 1 || activeIndex > slides.length - 1) {
       setActiveIndex(0);
       setTranslate(0);
       return;
@@ -22,14 +17,14 @@ export const Slider = () => {
   };
 
   const prevSlide = () => {
-    if (activeIndex >= shoes[0].images.length - 1) {
+    if (activeIndex >= slides.length - 1) {
       setActiveIndex(0);
       setTranslate(0);
       return;
     }
     if (activeIndex === 0) {
-      setActiveIndex(shoes[0].images.length - 1);
-      setTranslate((shoes[0].images.length - 1) * 750);
+      setActiveIndex(slides.length - 1);
+      setTranslate((slides.length - 1) * 750);
       return;
     }
 
@@ -47,10 +42,17 @@ export const Slider = () => {
         className={`absolute cursor-pointer -left-0 z-10`}
       />
       <div
-        className={`flex items-center h-full w-[750px] -translate-x-[${translate}px]`}
+        className={`flex items-center h-full w-full -translate-x-[${translate}px] transition-transform duration-700`}
       >
-        {shoes[0].images.map((image, i) => {
-          return <img src={image} alt="" className="w-[750px]" />;
+        {slides.map((image, i) => {
+          return (
+            <img
+              key={image + i}
+              src={image}
+              alt={image}
+              className="min-w-[750px]"
+            />
+          );
         })}
       </div>
       <CaretCircleRight
