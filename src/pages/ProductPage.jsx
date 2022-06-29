@@ -5,9 +5,9 @@ import { useParams } from "react-router-dom";
 
 import { Slider } from "../components/Slider";
 
-export const ProductPage = () => {
+export const ProductPage = ({ cart, setCart }) => {
+  scrollTo(0, 0);
   const [units, setUnits] = useState(1);
-  const [cart, setCart] = useState([]);
   const { shoe } = useParams();
 
   const shoeData = shoes.filter(
@@ -28,9 +28,9 @@ export const ProductPage = () => {
         }
       });
     } else {
-      console.log(false);
       setCart(cart.concat({ ...shoeData[0], units }));
     }
+    scrollTo(0, 0);
   };
 
   return (
