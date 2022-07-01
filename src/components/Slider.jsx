@@ -5,6 +5,14 @@ export const Slider = ({ slides }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [translate, setTranslate] = useState(0);
 
+  const getWidth = () => {
+    let result = 750;
+    if (screen.width < 768) {
+      result = 320;
+    }
+    return result;
+  };
+
   const nextSlide = () => {
     if (activeIndex === slides.length - 1 || activeIndex > slides.length - 1) {
       setActiveIndex(0);
@@ -13,7 +21,7 @@ export const Slider = ({ slides }) => {
     }
 
     setActiveIndex(activeIndex + 1);
-    setTranslate((activeIndex + 1) * 750);
+    setTranslate((activeIndex + 1) * getWidth());
   };
 
   const prevSlide = () => {
@@ -24,16 +32,16 @@ export const Slider = ({ slides }) => {
     }
     if (activeIndex === 0) {
       setActiveIndex(slides.length - 1);
-      setTranslate((slides.length - 1) * 750);
+      setTranslate((slides.length - 1) * getWidth());
       return;
     }
 
     setActiveIndex(activeIndex + 1);
-    setTranslate((activeIndex + 1) * 750);
+    setTranslate((activeIndex + 1) * getWidth());
   };
 
   return (
-    <div className="flex items-center h-[680px] w-[750px] rounded-xl overflow-hidden relative">
+    <div className="flex items-center h-[680px] w-[320px] md:w-[750px] rounded-xl overflow-hidden relative">
       <CaretCircleLeft
         size={32}
         weight="fill"
@@ -50,7 +58,7 @@ export const Slider = ({ slides }) => {
               key={image + i}
               src={image}
               alt={image}
-              className="min-w-[750px]"
+              className="min-w-[320px] md:min-w-[750px]"
             />
           );
         })}

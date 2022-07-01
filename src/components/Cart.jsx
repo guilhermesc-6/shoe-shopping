@@ -1,4 +1,5 @@
 import { PlusCircle, MinusCircle, X } from "phosphor-react";
+import emptyCart from "../assets/Shopping_cart.svg";
 
 export const Cart = ({ cart, setCart, isCartActive, setIsCartActive }) => {
   const handleClick = (e, type) => {
@@ -45,43 +46,48 @@ export const Cart = ({ cart, setCart, isCartActive, setIsCartActive }) => {
       />
       <strong className="text-2xl">Cart</strong>
       <div className="min-h-[250px] w-full px-5 flex flex-col items-center gap-2">
-        {cart.length > 0
-          ? cart.map((item) => {
-              return (
-                <div
-                  key={item.name.replace(/\s/g, "-")}
-                  className="w-full flex gap-1 items-center justify-between"
-                >
-                  <div className="w-24 h-24 flex items-center overflow-hidden rounded-[25px]">
-                    <img src={item.images[0]} alt={item.name} />
-                  </div>
-                  <div className="flex flex-col gap-2 items-center">
-                    <span className="text-xs">{item.name}</span>
-                    <span>${item.price * item.units}</span>
-                  </div>
-                  <div className="flex flex-col items-center gap-1">
-                    <MinusCircle
-                      size={24}
-                      weight="fill"
-                      className="cursor-pointer"
-                      onClick={(e) => {
-                        handleClick(e, "minus");
-                      }}
-                    />
-                    <span>{item.units}</span>
-                    <PlusCircle
-                      size={24}
-                      weight="fill"
-                      className="cursor-pointer"
-                      onClick={(e) => {
-                        handleClick(e, "plus");
-                      }}
-                    />
-                  </div>
+        {cart.length > 0 ? (
+          cart.map((item) => {
+            return (
+              <div
+                key={item.name.replace(/\s/g, "-")}
+                className="w-full flex gap-1 items-center justify-between"
+              >
+                <div className="w-24 h-24 flex items-center overflow-hidden rounded-[25px]">
+                  <img src={item.images[0]} alt={item.name} />
                 </div>
-              );
-            })
-          : "Cart empty"}
+                <div className="flex flex-col gap-2 items-center">
+                  <span className="text-xs">{item.name}</span>
+                  <span>${(item.price * item.units).toFixed(2)}</span>
+                </div>
+                <div className="flex flex-col items-center gap-1">
+                  <MinusCircle
+                    size={24}
+                    weight="fill"
+                    className="cursor-pointer"
+                    onClick={(e) => {
+                      handleClick(e, "minus");
+                    }}
+                  />
+                  <span>{item.units}</span>
+                  <PlusCircle
+                    size={24}
+                    weight="fill"
+                    className="cursor-pointer"
+                    onClick={(e) => {
+                      handleClick(e, "plus");
+                    }}
+                  />
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          <div className="w-full flex flex-col items-center gap-2 my-3">
+            <h1 className="text-2xl">Your cart is empty!</h1>
+            <img src={emptyCart} alt="Empty Cart" />
+          </div>
+        )}
       </div>
       <div className="flex flex-col gap-3">
         <button

@@ -6,13 +6,16 @@ import { useParams } from "react-router-dom";
 import { Slider } from "../components/Slider";
 
 export const ProductPage = ({ cart, setCart }) => {
-  scrollTo(0, 0);
   const [units, setUnits] = useState(1);
   const { shoe } = useParams();
 
   const shoeData = shoes.filter(
     (item) => item.name === shoe.replace(/[-]/g, " ")
   );
+
+  useEffect(() => {
+    scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     if (units < 1) {
@@ -34,9 +37,9 @@ export const ProductPage = ({ cart, setCart }) => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-between py-8 bg-gradient-to-r from-zinc-100 to-zinc-300 relative">
+    <div className="min-h-screen flex flex-col items-center justify-between py-8 bg-gradient-to-r from-zinc-100 to-zinc-300 relative scroll-smooth">
       <div className="flex flex-col items-center text-stone-900 absolute right-32 top-10 z-50">
-        <strong className="text-2xl">{shoeData[0].name}</strong>
+        <strong className="text-2xl ml-7 md:ml-0">{shoeData[0].name}</strong>
         <span className="text-xl">{`$ ${shoeData[0].price}`}</span>
       </div>
       <Slider slides={shoeData[0].images} />
